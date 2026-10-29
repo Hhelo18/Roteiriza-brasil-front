@@ -1,0 +1,10 @@
+ROTEIRIZA BRASIL - COMO INICIAR
+
+1. Extraia esta pasta do ZIP.
+2. Abra a pasta roteiriza-brasil-site-funcional no VS Code (File > Open Folder).
+3. Abra o terminal do VS Code.
+4. Execute: npm install
+5. Execute: npm run dev
+6. Abra no navegador o endereço local mostrado no terminal (normalmente http://localhost:5173).
+
+As páginas de destino abrem ao clicar em Conhecer destino. A página separada do Rio foi removida do menu; o Rio continua disponível dentro de Destinos.
