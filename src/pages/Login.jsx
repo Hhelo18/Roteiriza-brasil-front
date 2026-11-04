@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiPost } from "../services/api";
 
 export default function Login({ cadastro = false }) {
 const [nome, setNome] = useState("");
@@ -7,20 +8,28 @@ const [senha, setSenha] = useState("");
 const [aceitou, setAceitou] = useState(false);
 const [mensagem, setMensagem] = useState("");
 
-function handleSubmit(event) {
+async function handleSubmit(event) {
 event.preventDefault();
+setMensagem("");
 
 if (cadastro && !aceitou) {
   setMensagem("Aceite a política de privacidade para continuar.");
   return;
 }
 
-setMensagem(
-  cadastro
-    ? "Cadastro demonstrativo concluído!"
-    : "Login demonstrativo enviado!"
-);
+if (!cadastro) {
+  setMensagem(
+    "O back-end ainda não disponibiliza um endpoint de login. Solicite uma rota de autenticação para validar suas credenciais.",
+  );
+  return;
+}
 
+try {
+  await apiPost("/api/v1/usuarios", { nome, email, senha });
+  setMensagem("Cadastro realizado com sucesso!");
+} catch (error) {
+  setMensagem(error.message);
+}
 }
 
 return (

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { apiPost } from "../services/api";
 
 export default function Cadastro() {
   const [nome, setNome] = useState("");
@@ -9,16 +10,21 @@ export default function Cadastro() {
   const [mensagem, setMensagem] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+    setMensagem("");
 
     if (!aceitou) {
       setMensagem("Aceite a política de privacidade para continuar.");
       return;
     }
 
-    alert("Conta criada com sucesso!");
-    navigate("/login");
+    try {
+      await apiPost("/api/v1/usuarios", { nome, email, senha });
+      navigate("/login");
+    } catch (error) {
+      setMensagem(error.message);
+    }
   }
 
   return (
