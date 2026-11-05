@@ -20,8 +20,12 @@ export default function Cadastro() {
     }
 
     try {
-      await apiPost("/api/v1/usuarios", { nome, email, senha });
-      navigate("/login");
+      const usuario = await apiPost("/api/v1/usuarios", { nome, email, senha });
+      const id = typeof usuario === "object" ? usuario?.id : usuario;
+      if (id === undefined || id === null || id === "") {
+        throw new Error("O cadastro foi concluído, mas a API não retornou o id do usuário.");
+      }
+      navigate(`/meus-dados/${encodeURIComponent(id)}`);
     } catch (error) {
       setMensagem(error.message);
     }

@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export default function Home() {
   const [termoBusca, setTermoBusca] = useState('')
+  const location = useLocation()
   const navigate = useNavigate()
 
   const lidarComBusca = (e) => {
@@ -89,6 +90,11 @@ export default function Home() {
 
   return (
     <main style={{ background: '#f8fafc', minHeight: '100vh', paddingBottom: '60px' }}>
+      {location.state?.mensagem && (
+        <p role="status" style={{ margin: 0, padding: '14px 20px', background: '#e8f5f2', color: '#167f84', textAlign: 'center' }}>
+          {location.state.mensagem}
+        </p>
+      )}
       {/* Banner Principal (Hero) com Barra de Busca */}
       <section style={{ 
         position: 'relative', 

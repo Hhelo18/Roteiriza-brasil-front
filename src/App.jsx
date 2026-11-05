@@ -11,6 +11,7 @@ import Planilha from './pages/Planilha'
 import Avaliacoes from './pages/Avaliacoes'
 import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
+import MeusDados from './pages/MeusDados'
 import Guias from './pages/Guias'
 import PerfilGuia from './pages/PerfilGuia'
 import DicasViagem from './pages/DicasViagem'
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/avaliacoes" element={<Avaliacoes />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/meus-dados/:id" element={<MeusDados />} />
           <Route path="/dicas" element={<DicasViagem />} />
           <Route path="/contato" element={<Contato />} />
           {/* Rotas de política configuradas para evitar tela branca */}
